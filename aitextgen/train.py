@@ -139,7 +139,7 @@ class ATGProgressBar(ProgressBarBase):
         self.freeze_layers(pl_module)
 
     # def on_train_end(self, trainer, pl_module):
-    def on_train_end(self, *args, **kwargs):
+    def on_train_end(self, trainer, pl_module):
         self.main_progress_bar.close()
         self.unfreeze_layers(pl_module)
 
