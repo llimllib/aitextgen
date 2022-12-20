@@ -138,7 +138,8 @@ class ATGProgressBar(ProgressBarBase):
         )
         self.freeze_layers(pl_module)
 
-    def on_train_end(self, trainer, pl_module):
+    # def on_train_end(self, trainer, pl_module):
+    def on_train_end(self, *args, **kwargs):
         self.main_progress_bar.close()
         self.unfreeze_layers(pl_module)
 
@@ -148,8 +149,8 @@ class ATGProgressBar(ProgressBarBase):
         items.pop("v_num", None)
         return items
 
-    def on_train_batch_end(self, trainer, pl_module):
-        super().on_train_batch_end(trainer, pl_module)
+    def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
+        super().on_train_batch_end(trainer, pl_module, outputs, batch, batch_idx)
 
         # clean up the GPU cache used for the benchmark
         # https://discuss.pytorch.org/t/about-torch-cuda-empty-cache/34232/4
